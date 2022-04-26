@@ -99,5 +99,10 @@ Además de lo visto en clase, os paso la siguiente información que puede result
   + [Interesante](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/MCE_review.pdf) revisión del uso de las técnicas multicriterio en cuestiones de conservación de la naturaleza. Muy recomendable este trabajo.
   + [Artículo](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/ecological_corridors_multicriteria.pdf) que describe cómo la conectividad ecológica del paisaje usando evaluación multicriterio.
   + [Informe](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/memoria_apicola_2004.pdf) del gobierno de Andalucía que describe cómo se hizo el mapa de aprovechamientos apícolas en esta región usando la técnica de la evaluación multicriterio. 
-  + 
+  + [Texto](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/ch35.pdf) descriptivo de la evaluación multicriterio según R. Eastman, uno de sus principales promotores.
+  + [Manual](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/IDRISI-Selva-Spanish-Manual.pdf) del SIG Idrisi, que es uno de los que mejor implementan la evaluación multicriterio.
+
+
+
+
 
