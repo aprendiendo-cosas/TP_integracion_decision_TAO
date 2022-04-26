@@ -1,18 +1,9 @@
-# Creación de variables y de criterios sobre el problema decisional planteado
+# Técnicas de agregación de variables socioecológicas
 
 
 > + **_Curso_**: DECISION - Uso de información sintética como apoyo a la toma de decisiones. Proyecto TAO (Tropical Andes Observatory)
 > + **_Autor_**:  Curro Bonet-García (fjbonet@uco.es)
-> + **_Duración_**: 3 horas.
-
-
-
-# Técnicas de agregación de variables ambientales
-
-
-> + **_Versión_**: 2021-2022
-> + **_Asignatura (titulación)_**: Ciclo de gestión del dato: ecoinformática (máster conservación, gestión y restauración de la biodiversidad. UGR). Curso 2021-2022
-> + **_Autor_**: Curro Bonet-García (fjbonet@uco.es)
+> + **_Duración_**: 1.5 horas.
 
 
 
@@ -37,30 +28,9 @@ Esta sesión se organiza en torno al siguiente hilo argumental:
     + Evaluación multicriterio. 
     + Operadores booleanos.
 
-En [esta](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/presentacion/presentacion_agregacion.pptx) presentación se resumen los conceptos anteriores. 
+En [esta](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/presentacion/presentacion_agregacion.pptx) presentación se resumen los conceptos anteriores. 
 
 Las siguientes secciones describen brevemente las dos técnicas de integración que hemos visto: evaluación multicriterio e integración mediante operadores booleanos. Antes describiremos el paso previo común a ambas: transformar los mapas de variables en mapas de criterios:
-
-## Transformación de variable a criterio
-
-A lo largo de la asignatura hemos trabajado en la generación de mapas que muestran la distribución espacial de algunas variables biofísicas relevantes para nuestro caso de estudio: densidad de los pinares, diversidad (índice de Shannon), producción primaria, etc. Estas capas expresan la variable en cuestión usando unidades propias de la variable considerada (ej. árboles/hectárea). Además se pueden usar para multitud de situaciones diferentes. Es decir, un mapa de profundidad del suelo, por ejemplo, se puede usar para nuestro caso de estudio y para cualquier otro en el que el suelo sea relevante.
-
-Pero cuando aplicamos a la variable un cierto criterio decisional debemos de transformar el mapa que representa la distribución espacial de dicha variable. Es decir, si queremos tener un mapa que muestre la distribución espacial de un criterio concreto, es necesario transformar la variable de la que partimos. Por ejemplo, imaginemos que queremos ubicar en el territorio un área recreativa. Y resulta que la densidad del bosque es determinante para esto: las zonas más densas no son adecuadas porque en ellas no caben las mesas del área recreativa. Así, en este caso, **al aumentar la densidad del bosque, se reduce la idoneidad para albergar áreas recreativas**. Sin embargo, en el ejemplo que nos ocupa ocurre lo contrario: **al aumentar la densidad aumenta la idoneidad** porque debemos de reducir la competencia intraespecífica en aquellos lugares en los que ésta es más intensa (más densidad). En el proceso de transformación de la *variable* a *criterio*, aplicamos una función de transformación. Esta función cumple dos objetivos:
-
-+ Estandariza los valores de todos los mapas para usar un rango de 0 a 1 (o a veces de 0 a 255)
-+ Transforma los valores de la variable (producción primaria, profundidad del suelo, etc.) a valores de idoneidad cualitativos.
-
-La función de transformación puede tener formas diferentes. En nuestro caso asumiremos que la relación entre cada variable y su criterio es lineal. Así que tendremos dos situaciones representadas por los dos dibujos que hay a continuación: Función de preferencia directa e inversa. 
-
-
-
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_final_ecoinf_ugr/raw/2021__2022/imagenes/funcion_pertenencia_directa.png" alt="imagen" style="zoom:25%;" />
-
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_final_ecoinf_ugr/raw/2021__2022/imagenes/funcion_pertenencia_inversa.png" alt="imagen" style="zoom:25%;" />
-
-
-
-En los dibujos anteriores también puedes ver cómo calcular los parámetros de las funciones. Dado que una recta está definida por dos puntos, es fácil despejar los parámetros de la ecuación de la recta (pendiente y ordenada en el origen) a partir de los valores extremos (que toman valores 0 y 1 en el mapa de idoneidad).
 
 
 ## Evaluación multicriterio
@@ -75,12 +45,12 @@ Para agregar los criterios empezaremos asignando un peso a cada uno de ellos. La
 El proceso de integración se hace fácilmente con la calculadora de mapas de QGIS u operando con las capas raster en el caso de que trabajemos con R o con Python. El resultado final es la suma del producto de cada criterio (capa _apt_) por su peso. Introducimos la siguiente ecuación en la calculadora raster:
 
 ```python  
-  ("apt_densidad@1"*0.6)+("apt_cti@1"*0.1)+("apt_distancia@1"*0.3)
+  ("apt_erosion@1"*0.6)+("apt_dis_vias@1"*0.1)+("apt_SDM@1"*0.3)
  
 ```
 La siguiente imagen muestra el método con otro ejemplo diferente:
 
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_final_ecoinf_ugr/raw/2021__2022/imagenes/pesos_ponderados.png" alt="imagen" style="zoom:40%;" />
+<img src="https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/imagenes/pesos_ponderados.png" alt="imagen" style="zoom:40%;" />
 
 Uno de los problemas del análisis multicriterio es que ocurre una compensación de criterios. Si una variable tiene un valor muy alto en un lugar determinado, puede que el resultado final en ese punto sea alto aunque el valor de un criterio importante en ese punto sea bajo. Esto puede hacer que lugares no adecuados sean etiquetados como sí adecuados. Un ejemplo que ilustra esta situación: imaginemos que queremos montar un equipo de baloncesto. Un buen jugador de baloncesto ha de tener las siguientes características:
 + Altura.
@@ -93,10 +63,10 @@ Si le damos distintos pesos a esas variables y con eso "puntuamos" la idoneidad 
 
 En esta segunda técnica no se asignan pesos a los criterios que combinamos sino que se establecen condiciones que deben cumplir los lugares de nuestra zona de estudio para ser idoneos según el objetivo del proceso decisiona en cuestión. Volviendo al ejemplo del jugador de baloncesto ideal, diríamos algo así: debe de tener los tobillos fuertes **y** **o bien** ser fuerte **o bien** ser alto. De alguna forma estamos diciendo que hay una condición **necesaria** para ser buen jugador, pero no suficiente. Necesita tener los tobillos resistentes y luego una de las otras dos condiciones. Esta forma de combinar criterios decisionales recibe el nombre de integración mediante operadores booleanos porque implican el uso de las conjunciones **o** e **y**. 
 
-En el ejemplo que nos ocupa, usaremos operadores lógicos para integrar las tres capas. Consideraremos que un lugar es adecuado para satisfaer nuestros objetivos si cumple un criterio específico y una combinación de los otros dos. Es decir, pondremos como criterio fundamental que los lugares adecuados tengan una **alta densidad de pinos**. Si no se cumple este criterio, nunca se podrá obtener un valor alto al final del proceso de integración de las variables. Los otros dos criterios serán optativos entre sí. Es decir, seleccionaremos como lugares adecuados aquellos que **o bien están cerca de una mancha de vegetación natural, o bien tienen suelos potencialmente húmedos**. Es decir, en conjunto aplicaremos los siguientes criterios concatenados: Un lugar es considerado como adecuado si:
+En el ejemplo que nos ocupa, usaremos operadores lógicos para integrar las tres capas. Consideraremos que un lugar es adecuado para satisfaer nuestros objetivos si cumple un criterio específico y una combinación de los otros dos. Es decir, pondremos como criterio fundamental que los lugares adecuados tengan una **gran probabilidad de de presencia de la especie invasora**. Si no se cumple este criterio, nunca se podrá obtener un valor alto al final del proceso de integración de las variables. Los otros dos criterios serán optativos entre sí. Es decir, seleccionaremos como lugares adecuados aquellos que **o bien están cerca de una vía de comunicacióin, o bien tienen están cerca de una línea de alta tensión**. Es decir, en conjunto aplicaremos los siguientes criterios concatenados: Un lugar es considerado como adecuado si:
 
-+ Tiene una alta densidad de pinos **Y**:
-+ Está cerca de una mancha de vegetación natural **O** tiene suelos potencialmente húmedos. 
++ Tiene una gran probabilidad de presencia de la especie invasora **Y**:
++ Está cerca de una vía de comunicación **O** está cerca de una línea de alta tensión. 
 
 Para implementar esta operación en un SIG, usamos dos operadores matemáticos muy sencillos:
 
@@ -105,13 +75,13 @@ Para implementar esta operación en un SIG, usamos dos operadores matemáticos m
 
 La siguiente figura muestra el funcionamiento de estos operadores:
 
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_final_ecoinf_ugr/raw/2021__2022/imagenes/operadores_booleanos.png" alt="imagen" style="zoom:40%;" />
+<img src="https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/imagenes/operadores_booleanos.png" alt="imagen" style="zoom:40%;" />
 
 Para aplicar estos operadores a nuestras capas, puedes usar el comando [mosaic de SAGA](https://gis.stackexchange.com/questions/150312/combining-multiple-overlapping-rasters-retain-maximum-value). Este comando está disponible en QGIS. 
 
 Los operadores anteriores son un poco "rígidos" dado que solo seleccionan los valores extremos (mínimo o máximo). Para suavizar el resultado se pueden usar otros operadores como los mostrados en la siguiente figura:
 
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_final_ecoinf_ugr/raw/2021__2022/imagenes/operadores_difusos.png" alt="imagen" style="zoom:40%;" />
+<img src="https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/imagenes/operadores_difusos.png" alt="imagen" style="zoom:40%;" />
 
 
 
@@ -136,11 +106,11 @@ Para reclasificar una capa rastser en QGIS, buscamos el algoritmo "reclassify by
 
 Además de lo visto en clase, os paso la siguiente información que puede resultar de utilidad:
 
-+ [Artículo](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/biblio/modelos_ecologicos.pdf) que describe distintos tipos de modelos ecológicos. Incide en alguno de los conceptos descritos en la sesión final de nuestra asignatura. 
-+ [Resumen](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/biblio/herramientas_apoyo_decisiones.pdf) de mi tesis (año 2003, no os riais de los esquemas, por favor. En esa época no existía R). En el texto se describen los conceptos generales sobre integración de información ambiental usando técnicas de operadores booleanos. He recortado solo la parte interesante. Eso hace que el texto no sea muy fluido porque faltan secciones.
++ [Artículo](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/modelos_ecologicos.pdf) que describe distintos tipos de modelos ecológicos. Incide en alguno de los conceptos descritos en la sesión final de nuestra asignatura. 
++ [Resumen](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/herramientas_apoyo_decisiones.pdf) de mi tesis (año 2003, no os riais de los esquemas, por favor. En esa época no existía R). En el texto se describen los conceptos generales sobre integración de información ambiental usando técnicas de operadores booleanos. He recortado solo la parte interesante. Eso hace que el texto no sea muy fluido porque faltan secciones.
 + Varios textos sobre análisis multicriterio:
-  + [Artículo](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/biblio/multicriterio_seleccion_zonas_plantas_electricas.pdf) sobre el uso del análisis multicriterio para localizar plantas de producción fotovoltaica. 
-  + [Interesante](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/biblio/MCE_review.pdf) revisión del uso de las técnicas multicriterio en cuestiones de conservación de la naturaleza. Muy recomendable este trabajo.
-  + [Artículo](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/biblio/ecological_corridors_multicriteria.pdf) que describe cómo la conectividad ecológica del paisaje usando evaluación multicriterio.
-  + [Informe](https://github.com/aprendiendo-cosas/integracion_final_ecoinf_ugr/raw/2021__2022/biblio/memoria_apicola_2004.pdf) de la REDIAM que describe cómo se hizo el mapa de aprovechamientos apícolas de Andalucía usando la técnica de la evaluación multicriterio. 
-  + [Guión](https://rawcdn.githack.com/aprendiendo-cosas/P_comp_intra_ecologia_CCAA/2020-2021/guion_competencia_intraespecifica_pinares.html) de una práctica de segundo de ambientales en la que aplicamos la evaluación multicriterio. Como veréis, se parece bastante al caso de estudio que hemos desarrollado en nuestra asignatura. 
+  + [Artículo](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/multicriterio_seleccion_zonas_plantas_electricas.pdf) sobre el uso del análisis multicriterio para localizar plantas de producción fotovoltaica. 
+  + [Interesante](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/MCE_review.pdf) revisión del uso de las técnicas multicriterio en cuestiones de conservación de la naturaleza. Muy recomendable este trabajo.
+  + [Artículo](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/ecological_corridors_multicriteria.pdf) que describe cómo la conectividad ecológica del paisaje usando evaluación multicriterio.
+  + [Informe](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/memoria_apicola_2004.pdf) del gobierno de Andalucía que describe cómo se hizo el mapa de aprovechamientos apícolas en esta región usando la técnica de la evaluación multicriterio. 
+
