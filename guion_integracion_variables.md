@@ -11,34 +11,18 @@
 
 Esta actividad tiene los siguientes objetivos de aprendizaje:
 
-+ Conocer los grandes tipos de herramientas que utilizamos para conocer mejor el funcionamiento de los sistemas naturales.
++ Conocer dos tipos de herramientas que utilizamos para conocer mejor el funcionamiento de los sistemas naturales.
 + Aprender técnicas de integración de datos relacionados con la asistencia a la toma de decisiones. 
 
 
-
-## Hilo argumental
-
-Esta sesión se organiza en torno al siguiente hilo argumental:
-+ Enumeración de los factores ecológicos y socioeconómicos que nos permiten responder a la pregunta inicialmente planteada en esta asignatura.
-+ Descripción de los dos tipos de modelos que usamos para mejorar nuestra comprensión de la naturaleza: empíricos y basados en procesos.
-+ Descripción de un tercer grupo de herramientas muy útiles para trasladar conocimiento científico a los tomadores de decisiones.
-  + Definición de conceptos relacionados con estas herramientas: objetivo, variable, criterio, análisis de la decisión.
-  + Transformación de variables en criterios.
-  + Combinación de criterios:
-    + Evaluación multicriterio. 
-    + Operadores booleanos.
-
-En [esta](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/presentacion/presentacion_agregacion.pptx) presentación se resumen los conceptos anteriores. 
-
-Las siguientes secciones describen brevemente las dos técnicas de integración que hemos visto: evaluación multicriterio e integración mediante operadores booleanos. Antes describiremos el paso previo común a ambas: transformar los mapas de variables en mapas de criterios:
 
 
 ## Evaluación multicriterio
 
 El análisis multicriterio es una técnica muy sencilla que permite conciliar en un mismo mapa criterios diferentes. Es una forma de espacializar criterios decisionales basados en conocimiento experto. Es decir, gracias a esta técnica podemos obtener mapas que recojan los criterios de un centro decisor concreto con relación a un aspecto determinado.  En nuestro ejemplo tenemos varios criterios y se trata de unificarlos en un único mapa que asigne un valor de aptitud global a cada punto ocupado por pinares de repoblación. Por ejemplo:
-+ Criterio de densidad: a más densidad más aptitud.
-+ Criterio de profundidad del suelo: a más profundidad más aptitud.
-+ Criterio de distancia a manchas donadoras de semillas: A más distancia menos aptitud.
++ Criterio de erosión: a más erosión, más aptitud.
++ Criterio de distancia a vías de comunicación: a menos distancia, más aptitud.
++ Criterio de idoneidad del nicho para la especie invasora: A más idoneidad, más aptitud.
 
 Para agregar los criterios empezaremos asignando un peso a cada uno de ellos. La suma de los pesos ha de ser 1. El criterio que tenga más peso contribuirá en mayor medida al mapa final. Procedemos en dos pasos:
 
@@ -50,7 +34,7 @@ El proceso de integración se hace fácilmente con la calculadora de mapas de QG
 ```
 La siguiente imagen muestra el método con otro ejemplo diferente:
 
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/imagenes/pesos_ponderados.png" alt="imagen" style="zoom:40%;" />
+<img src="https://raw.githubusercontent.com/aprendiendo-cosas/TP_integracion_decision_TAO/main/imagenes/pesos_ponderados.png" alt="imagen" style="zoom:40%;" />
 
 Uno de los problemas del análisis multicriterio es que ocurre una compensación de criterios. Si una variable tiene un valor muy alto en un lugar determinado, puede que el resultado final en ese punto sea alto aunque el valor de un criterio importante en ese punto sea bajo. Esto puede hacer que lugares no adecuados sean etiquetados como sí adecuados. Un ejemplo que ilustra esta situación: imaginemos que queremos montar un equipo de baloncesto. Un buen jugador de baloncesto ha de tener las siguientes características:
 + Altura.
@@ -75,13 +59,15 @@ Para implementar esta operación en un SIG, usamos dos operadores matemáticos m
 
 La siguiente figura muestra el funcionamiento de estos operadores:
 
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/imagenes/operadores_booleanos.png" alt="imagen" style="zoom:40%;" />
+<img src="https://raw.githubusercontent.com/aprendiendo-cosas/TP_integracion_decision_TAO/main/imagenes/operadores_booleanos.png" alt="imagen" style="zoom:40%;" />
+
+
 
 Para aplicar estos operadores a nuestras capas, puedes usar el comando [mosaic de SAGA](https://gis.stackexchange.com/questions/150312/combining-multiple-overlapping-rasters-retain-maximum-value). Este comando está disponible en QGIS. 
 
 Los operadores anteriores son un poco "rígidos" dado que solo seleccionan los valores extremos (mínimo o máximo). Para suavizar el resultado se pueden usar otros operadores como los mostrados en la siguiente figura:
 
-<img src="https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/imagenes/operadores_difusos.png" alt="imagen" style="zoom:40%;" />
+<img src="https://raw.githubusercontent.com/aprendiendo-cosas/TP_integracion_decision_TAO/main/imagenes/operadores_difusos.png" alt="imagen" style="zoom:40%;" />
 
 
 
@@ -113,4 +99,5 @@ Además de lo visto en clase, os paso la siguiente información que puede result
   + [Interesante](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/MCE_review.pdf) revisión del uso de las técnicas multicriterio en cuestiones de conservación de la naturaleza. Muy recomendable este trabajo.
   + [Artículo](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/ecological_corridors_multicriteria.pdf) que describe cómo la conectividad ecológica del paisaje usando evaluación multicriterio.
   + [Informe](https://github.com/aprendiendo-cosas/TP_integracion_decision_TAO/raw/main/biblio/memoria_apicola_2004.pdf) del gobierno de Andalucía que describe cómo se hizo el mapa de aprovechamientos apícolas en esta región usando la técnica de la evaluación multicriterio. 
+  + 
 
